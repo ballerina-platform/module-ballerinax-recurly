@@ -25,6 +25,8 @@ confirmSubscription = false
 
 Creating an account and a subscription changes billing data, so the example only does this when `confirmSubscription` is `true`. Otherwise it only verifies the plan.
 
+The new account has no billing information, so the subscription is created with the `manual` collection method: Recurly issues invoices for the account to pay rather than charging a stored payment method. To collect automatically, attach billing information to the account before subscribing and omit `collectionMethod`.
+
 ## Run the example
 
 Execute the following command to run the example:

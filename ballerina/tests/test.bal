@@ -39,49 +39,49 @@ isolated function testListAccounts() returns error? {
     test:assertTrue(response.data is Account[]);
 }
 
-@test:Config {groups: ["mock_tests"]}
+@test:Config {groups: ["mock_tests"], enable: !isLiveServer}
 isolated function testCreateAccount() returns error? {
     Account response = check recurly->createAccount({code: "acme-corp", email: "billing@acme.example"});
     test:assertEquals(response.code, "acme-corp");
 }
 
-@test:Config {groups: ["mock_tests"]}
+@test:Config {groups: ["mock_tests"], enable: !isLiveServer}
 isolated function testGetAccount() returns error? {
     Account response = check recurly->getAccount(ACCOUNT_ID);
     test:assertEquals(response.id, ACCOUNT_ID);
 }
 
-@test:Config {groups: ["mock_tests"]}
+@test:Config {groups: ["mock_tests"], enable: !isLiveServer}
 isolated function testUpdateAccount() returns error? {
     Account response = check recurly->updateAccount(ACCOUNT_ID, {email: "billing@acme.example"});
     test:assertEquals(response.id, ACCOUNT_ID);
 }
 
-@test:Config {groups: ["mock_tests"]}
+@test:Config {groups: ["mock_tests"], enable: !isLiveServer}
 isolated function testDeactivateAccount() returns error? {
     Account response = check recurly->deactivateAccount(ACCOUNT_ID);
     test:assertEquals(response.state, "inactive");
 }
 
-@test:Config {groups: ["mock_tests"]}
+@test:Config {groups: ["mock_tests"], enable: !isLiveServer}
 isolated function testGetAccountBalance() returns error? {
     AccountBalance response = check recurly->getAccountBalance(ACCOUNT_ID);
     test:assertTrue(response.balances is AccountBalanceAmount[]);
 }
 
-@test:Config {groups: ["mock_tests"]}
+@test:Config {groups: ["mock_tests"], enable: !isLiveServer}
 isolated function testGetBillingInfo() returns error? {
     BillingInfo response = check recurly->getBillingInfo(ACCOUNT_ID);
     test:assertEquals(response.accountId, ACCOUNT_ID);
 }
 
-@test:Config {groups: ["mock_tests"]}
+@test:Config {groups: ["mock_tests"], enable: !isLiveServer}
 isolated function testListAccountInvoices() returns error? {
     InvoiceList response = check recurly->listAccountInvoices(ACCOUNT_ID);
     test:assertTrue(response.data is Invoice[]);
 }
 
-@test:Config {groups: ["mock_tests"]}
+@test:Config {groups: ["mock_tests"], enable: !isLiveServer}
 isolated function testListAccountSubscriptions() returns error? {
     SubscriptionList response = check recurly->listAccountSubscriptions(ACCOUNT_ID);
     test:assertTrue(response.data is Subscription[]);
@@ -93,13 +93,13 @@ isolated function testListCoupons() returns error? {
     test:assertTrue(response.data is Coupon[]);
 }
 
-@test:Config {groups: ["mock_tests"]}
+@test:Config {groups: ["mock_tests"], enable: !isLiveServer}
 isolated function testCreateCoupon() returns error? {
     Coupon response = check recurly->createCoupon({code: "SUMMER15", name: "Summer discount", discountType: "percent"});
     test:assertTrue(response.id is string);
 }
 
-@test:Config {groups: ["mock_tests"]}
+@test:Config {groups: ["mock_tests"], enable: !isLiveServer}
 isolated function testGetCoupon() returns error? {
     Coupon response = check recurly->getCoupon(COUPON_ID);
     test:assertEquals(response.id, COUPON_ID);
@@ -111,13 +111,13 @@ isolated function testListInvoices() returns error? {
     test:assertTrue(response.data is Invoice[]);
 }
 
-@test:Config {groups: ["mock_tests"]}
+@test:Config {groups: ["mock_tests"], enable: !isLiveServer}
 isolated function testGetInvoice() returns error? {
     Invoice response = check recurly->getInvoice(INVOICE_ID);
     test:assertEquals(response.id, INVOICE_ID);
 }
 
-@test:Config {groups: ["mock_tests"]}
+@test:Config {groups: ["mock_tests"], enable: !isLiveServer}
 isolated function testCollectInvoice() returns error? {
     Invoice response = check recurly->collectInvoice(INVOICE_ID, {});
     test:assertEquals(response.state, "paid");
@@ -129,25 +129,25 @@ isolated function testListPlans() returns error? {
     test:assertTrue(response.data is Plan[]);
 }
 
-@test:Config {groups: ["mock_tests"]}
+@test:Config {groups: ["mock_tests"], enable: !isLiveServer}
 isolated function testCreatePlan() returns error? {
     Plan response = check recurly->createPlan({code: "gold", name: "Gold Plan", currencies: [{currency: "USD", unitAmount: 49.99}]});
     test:assertTrue(response.id is string);
 }
 
-@test:Config {groups: ["mock_tests"]}
+@test:Config {groups: ["mock_tests"], enable: !isLiveServer}
 isolated function testGetPlan() returns error? {
     Plan response = check recurly->getPlan(PLAN_ID);
     test:assertEquals(response.id, PLAN_ID);
 }
 
-@test:Config {groups: ["mock_tests"]}
+@test:Config {groups: ["mock_tests"], enable: !isLiveServer}
 isolated function testUpdatePlan() returns error? {
     Plan response = check recurly->updatePlan(PLAN_ID, {description: "Gold tier monthly subscription"});
     test:assertEquals(response.id, PLAN_ID);
 }
 
-@test:Config {groups: ["mock_tests"]}
+@test:Config {groups: ["mock_tests"], enable: !isLiveServer}
 isolated function testRemovePlan() returns error? {
     Plan response = check recurly->removePlan(PLAN_ID);
     test:assertEquals(response.id, PLAN_ID);
@@ -159,25 +159,25 @@ isolated function testListSubscriptions() returns error? {
     test:assertTrue(response.data is Subscription[]);
 }
 
-@test:Config {groups: ["mock_tests"]}
+@test:Config {groups: ["mock_tests"], enable: !isLiveServer}
 isolated function testCreateSubscription() returns error? {
     Subscription response = check recurly->createSubscription({planCode: "gold", currency: "USD", account: {code: "acme-corp"}});
     test:assertTrue(response.id is string);
 }
 
-@test:Config {groups: ["mock_tests"]}
+@test:Config {groups: ["mock_tests"], enable: !isLiveServer}
 isolated function testGetSubscription() returns error? {
     Subscription response = check recurly->getSubscription(SUBSCRIPTION_ID);
     test:assertEquals(response.id, SUBSCRIPTION_ID);
 }
 
-@test:Config {groups: ["mock_tests"]}
+@test:Config {groups: ["mock_tests"], enable: !isLiveServer}
 isolated function testCancelSubscription() returns error? {
     Subscription response = check recurly->cancelSubscription(SUBSCRIPTION_ID, {});
     test:assertEquals(response.state, "canceled");
 }
 
-@test:Config {groups: ["mock_tests"]}
+@test:Config {groups: ["mock_tests"], enable: !isLiveServer}
 isolated function testGetTransaction() returns error? {
     Transaction response = check recurly->getTransaction("txn-5001");
     test:assertEquals(response.id, "txn-5001");

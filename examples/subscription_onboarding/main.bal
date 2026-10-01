@@ -38,11 +38,13 @@ public function main() returns error? {
     });
     io:println("Account created: ", account.id);
 
-    // Step 3: Subscribe the account to the plan.
+    // Step 3: Subscribe the account to the plan. The account has no billing info, so the
+    // subscription uses manual collection: Recurly invoices the account instead of charging a card.
     recurly:Subscription subscription = check recurlyClient->createSubscription({
         planCode: planCode,
         currency: currency,
-        account: {code: accountCode}
+        account: {code: accountCode},
+        collectionMethod: "manual"
     });
     io:println("Subscription ", subscription.id, " is ", subscription.state);
 

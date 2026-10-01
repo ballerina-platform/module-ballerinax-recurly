@@ -16,7 +16,7 @@ public function main() returns error? {
     recurly:InvoiceList pending = check recurlyClient->listAccountInvoices(accountId, state = "past_due", 'limit = pageSize);
     recurly:Invoice[] invoices = pending.data ?: [];
     if pending.hasMore == true {
-        io:println("More than ", pageSize, " past due invoices exist, raise pageSize to review all of them.");
+        io:println("Only the first ", pageSize, " past due invoices are reviewed; the remaining invoices need pagination.");
     }
     io:println("Past due invoices: ", invoices.length());
 
