@@ -2,13 +2,19 @@
 
 The `ballerinax/recurly` connector provides practical examples illustrating usage in various scenarios.
 
-[//]: # (TODO: Add examples)
-1. 
-2. 
+1. **[Subscription onboarding](https://github.com/ballerina-platform/module-ballerinax-recurly/tree/main/examples/subscription_onboarding)** - Verify a plan, create an account, subscribe it to the plan and read its balance.
+
+2. **[Invoice collection review](https://github.com/ballerina-platform/module-ballerinax-recurly/tree/main/examples/invoice_collection_review)** - List an account's past due invoices, review their balances and optionally collect them.
 
 ## Prerequisites
 
-[//]: # (TODO: Add prerequisites)
+1. Create a Recurly API key as described in the [Setup guide](https://central.ballerina.io/ballerinax/recurly/latest#setup-guide).
+
+2. For each example, create a `Config.toml` file with the related configuration. Here's an example of how your Config.toml file should look:
+
+```toml
+apiKey = "<recurly-api-key>"
+```
 
 ## Running an example
 
